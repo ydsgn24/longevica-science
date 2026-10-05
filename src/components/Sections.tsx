@@ -458,10 +458,9 @@ export function Network() {
       id="network"
       ref={ref}
       style={{ top: stickyTop }}
-      className="sticky flex flex-col border-t border-line bg-paper pt-[120px] md:min-h-screen md:pt-0"
+      className="sticky flex flex-col border-t border-line bg-paper"
     >
-      {/* mobile: photo starts 50px under the fixed logo.
-          desktop: the full photo at its own 3:1 proportions, flush with the top separator;
+      {/* photo flush with the top separator; desktop shows the full photo at its own 3:1 proportions;
           the text sits on its empty left part */}
       <div className="relative">
         <BlurIn as="img" variant="wipe" src={n.image} alt="" className="hidden h-auto w-full md:block" />
@@ -481,8 +480,8 @@ export function Network() {
           </BlurIn>
         </div>
       </div>
-      {/* partner strip takes the remaining height, logos centred in it */}
-      <BlurIn delay={700} className="marquee flex flex-1 items-center py-10" aria-label="Partners">
+      {/* partner strip: 80px (mobile) / 100px (desktop) of room under the logos before the form slides over */}
+      <BlurIn delay={700} className="marquee pb-20 pt-10 md:pb-[100px]" aria-label="Partners">
         <div className="marquee-track">
           {/* the set is repeated so the track is wider than the screen; -50% shift loops seamlessly */}
           {[0, 1].map((half) => (
@@ -615,7 +614,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative z-10 flex flex-col justify-center bg-white py-20 md:min-h-screen">
+    <section id="contact" className="relative z-10 flex flex-col justify-center bg-white py-20 md:min-h-screen md:justify-start md:pt-36">
       <div className="container-x grid gap-14 md:grid-cols-2 md:items-center">
         {/* mobile: centred; desktop: left-aligned */}
         <div className="text-center md:text-left">

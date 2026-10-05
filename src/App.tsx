@@ -22,12 +22,14 @@ function Home() {
         {/* wrapper ends the hero's sticky range once the approach block has covered it */}
         <div className="relative">
           <Hero />
+          {/* mobile: 60px of scroll before the approach block starts sliding over the hero */}
+          <div aria-hidden className="h-[60px] md:hidden" />
           <Approach />
         </div>
         <div className="relative">
           <Process />
           {/* short pause: process stays put for a moment before expertise slides over */}
-          <div aria-hidden className="hidden h-[40vh] md:block" />
+          <div aria-hidden className="h-[60px] md:h-[40vh]" />
           <Expertise />
         </div>
         <Founder />
