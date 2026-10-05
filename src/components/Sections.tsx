@@ -614,7 +614,11 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative z-10 flex flex-col justify-center bg-white py-20 md:min-h-screen md:justify-start md:pt-36">
+    <section
+      id="contact"
+      // desktop: compact so the form and the footer fit on one screen together
+      className="relative z-10 flex flex-col justify-center bg-white py-20 md:justify-start md:pb-16 md:pt-36"
+    >
       <div className="container-x grid gap-14 md:grid-cols-2 md:items-center">
         {/* mobile: centred; desktop: left-aligned */}
         <div className="text-center md:text-left">

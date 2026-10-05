@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState, type CSSProperties, type ElementType, type ReactNode } from "react";
 
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+// Mobile reveals run faster (matches --reveal-speed in index.css).
+const revealSpeed = () => (window.matchMedia("(max-width: 767px)").matches ? 0.55 : 1);
 
 /** Becomes true once the element first enters the viewport (on load if it is already there). */
 export function useInViewOnce<T extends Element>(watchParent = false) {
@@ -46,7 +48,7 @@ export function BlurIn({
   [key: string]: unknown;
 }) {
   const [ref, inView] = useInViewOnce<HTMLElement>(variant === "wipe" || variant === "blind");
-  const style: CSSProperties = { transitionDelay: `${delay}ms` };
+  const style: CSSProperties = { transitionDelay: `calc(${delay}ms * var(--reveal-speed, 1))` };
   return (
     <Tag
       ref={ref}
@@ -87,7 +89,7 @@ export function RollText({
     running.current = true;
     // Both copies are identical, so snapping back to 0 at the end is invisible.
     const anim = el.animate([{ transform: "translateY(0)" }, { transform: "translateY(100%)" }], {
-      duration: 700,
+      duration: 700 * Math.max(revealSpeed(), 0.75),
       easing: "cubic-bezier(0.7, 0, 0.2, 1)",
       fill: "forwards",
     });
@@ -116,7 +118,7 @@ export function RollText({
       }
       return;
     }
-    const t = window.setTimeout(roll, delay);
+    const t = window.setTimeout(roll, delay * revealSpeed());
     return () => window.clearTimeout(t);
   }, [roll, delay, play, enter]);
 
