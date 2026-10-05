@@ -33,10 +33,8 @@ function Home() {
           <Expertise />
         </div>
         <Founder />
-        <div className="relative">
-          <Network />
-          <Contact />
-        </div>
+        <Network />
+        <Contact />
       </main>
       <Footer />
     </>
