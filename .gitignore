@@ -1,0 +1,14 @@
+node_modules
+dist
+.DS_Store
+.claude/
+
+# original source photos/logos dropped into the project root —
+# the site uses the optimised copies in public/images/
+/*.png
+/*.jpg
+/*.jpeg
+/*.avif
+/*.webp
+/*.svg
+tsconfig.tsbuildinfo

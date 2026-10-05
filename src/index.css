@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+body { @apply bg-paper text-ink font-sans antialiased; }
+
+@layer components {
+  .container-x { @apply w-full px-4 md:px-10; }
+  .label { @apply text-[12px] uppercase; }
+  .h-display { @apply font-normal uppercase leading-[0.95] tracking-[-0.02em]; }
+  .h-section { @apply font-normal leading-[1.05] tracking-[-0.02em]; }
+  .link-arrow { @apply label inline-flex items-center gap-2 border-b border-ink/40 pb-1 hover:border-ink transition-colors; }
+  .btn-dark { @apply label inline-flex items-center gap-3 rounded-sm bg-ink px-6 py-3.5 text-white hover:bg-black/80 transition-colors; }
+  .field { @apply w-full border border-line bg-white/60 px-4 py-3 text-sm placeholder:text-muted focus:border-ink focus:outline-none; }
+}
+
+.marquee { overflow: hidden; }
+.marquee-track { display: flex; width: max-content; animation: marquee 40s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+/* Load reveal: blur → sharp. Images also settle from a slight zoom. */
+.blur-in {
+  opacity: 0;
+  filter: blur(18px);
+  transform: translateY(14px);
+  transition:
+    opacity 1s ease,
+    filter 1.2s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.blur-in--image {
+  filter: blur(28px);
+  transform: scale(1.06);
+  transition-duration: 1.4s, 1.6s, 2.2s;
+}
+/* Blind: the image is uncovered top to bottom */
+.blur-in--blind {
+  opacity: 1;
+  filter: none;
+  transform: none;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.1s cubic-bezier(0.7, 0, 0.2, 1);
+}
+/* Wipe: the image is uncovered left to right while it sharpens */
+.blur-in--wipe {
+  opacity: 1;
+  filter: blur(12px);
+  transform: scale(1.04);
+  clip-path: inset(0 100% 0 0);
+  transition:
+    clip-path 1.4s cubic-bezier(0.7, 0, 0.2, 1),
+    filter 1.6s ease,
+    transform 2s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.blur-in.is-in { opacity: 1; filter: none; transform: none; }
+/* only masked variants keep a clip-path at rest — on text it would cut descenders */
+.blur-in--blind.is-in,
+.blur-in--wipe.is-in { clip-path: inset(0); }
+@media (prefers-reduced-motion: reduce) {
+  .blur-in { opacity: 1; filter: none; transform: none; clip-path: none; transition: none; }
+}
+
+/* Hero & approach side lists: one shared style */
+.side-list { font-size: 16px; font-weight: 500; line-height: 1.3; text-transform: uppercase; }
+
+/* Form: valid mark pops in and its check draws itself; errors fade in */
+.valid-mark { animation: mark-in 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.3) both; }
+.valid-mark path { stroke-dasharray: 12; stroke-dashoffset: 12; animation: check-draw 0.35s 0.2s ease-out forwards; }
+@keyframes mark-in { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: scale(1); } }
+@keyframes check-draw { to { stroke-dashoffset: 0; } }
+.field-error { animation: error-in 0.3s ease-out both; }
+@keyframes error-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .valid-mark, .valid-mark path, .field-error { animation: none; stroke-dashoffset: 0; }
+}
