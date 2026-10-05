@@ -22,11 +22,18 @@ const HERO_LIST_START = 900;
 
 export function Hero() {
   const h = c.hero;
+  // Hero reveals start on load (one frame after mount), not on scroll-into-view —
+  // on phones the text under the heading sits at the very bottom of the screen.
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setReady(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
   return (
     <section id="top" className="sticky top-0 h-[100svh] overflow-hidden md:h-screen">
       {/* photo + its fades + the darkening reveal as one layer, so no overlay shows
           on its own while the photo is still blurred in */}
-      <BlurIn variant="image" aria-hidden className="absolute inset-0">
+      <BlurIn variant="image" show={ready} aria-hidden className="absolute inset-0">
         {/* mobile: photo fills the first screen, raised 50px (the freed strip at the bottom
             sits under the opaque paper fade); desktop: right 62% */}
         <img
@@ -64,10 +71,10 @@ export function Hero() {
           </div>
         </div>
         <div className="max-w-[560px]">
-          <BlurIn as="h1" delay={150} className="h-display text-[54px] md:text-[96px]">
+          <BlurIn as="h1" show={ready} delay={150} className="h-display text-[54px] md:text-[96px]">
             <Lines lines={h.title} />
           </BlurIn>
-          <BlurIn as="p" delay={450} className="mt-8 max-w-[420px] text-[15px] leading-relaxed text-ink/80">
+          <BlurIn as="p" show={ready} delay={450} className="mt-8 max-w-[420px] text-[15px] leading-relaxed text-ink/80">
             {h.text}
           </BlurIn>
         </div>
