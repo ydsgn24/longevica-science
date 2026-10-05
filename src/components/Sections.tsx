@@ -24,20 +24,24 @@ export function Hero() {
   const h = c.hero;
   return (
     <section id="top" className="sticky top-0 h-[100svh] overflow-hidden md:h-screen">
-      {/* mobile: photo fills the first screen, raised 50px (the freed strip at the bottom
-          sits under the opaque paper fade); desktop: right 62% */}
-      <BlurIn
-        as="img"
-        variant="image"
-        src={h.image}
-        alt=""
-        className="absolute inset-x-0 -top-[50px] h-full w-full object-cover object-[calc(65%_+_20px)_center] md:left-auto md:top-0 md:h-full md:w-[62%] md:object-[72%_center]"
-      />
-      {/* mobile: paper-coloured fades keep the text readable over the photo */}
-      <div className="absolute inset-x-0 top-0 h-[45%] bg-gradient-to-b from-paper via-paper/70 to-transparent md:hidden" />
-      {/* one layer, fully opaque over the bottom 60px so the raised photo's edge never shows */}
-      <div className="absolute inset-x-0 bottom-0 h-[65%] bg-[linear-gradient(to_top,#F4F2EE_60px,rgb(244_242_238/0.8)_50%,transparent)] md:hidden" />
-      <div className="absolute inset-y-0 left-[38%] hidden w-[18%] bg-gradient-to-r from-paper to-transparent md:block" />
+      {/* photo + its fades + the darkening reveal as one layer, so no overlay shows
+          on its own while the photo is still blurred in */}
+      <BlurIn variant="image" aria-hidden className="absolute inset-0">
+        {/* mobile: photo fills the first screen, raised 50px (the freed strip at the bottom
+            sits under the opaque paper fade); desktop: right 62% */}
+        <img
+          src={h.image}
+          alt=""
+          className="absolute inset-x-0 -top-[50px] h-full w-full object-cover object-[calc(65%_+_20px)_center] md:left-auto md:top-0 md:h-full md:w-[62%] md:object-[72%_center]"
+        />
+        {/* mobile: paper-coloured fades keep the text readable over the photo */}
+        <div className="absolute inset-x-0 top-0 h-[45%] bg-gradient-to-b from-paper via-paper/70 to-transparent md:hidden" />
+        {/* one layer, fully opaque over the bottom 60px so the raised photo's edge never shows */}
+        <div className="absolute inset-x-0 bottom-0 h-[65%] bg-[linear-gradient(to_top,#F4F2EE_60px,rgb(244_242_238/0.8)_50%,transparent)] md:hidden" />
+        <div className="absolute inset-y-0 left-[38%] hidden w-[18%] bg-gradient-to-r from-paper to-transparent md:block" />
+        {/* desktop: soft, wide darkening from the right edge behind the white column */}
+        <div className="absolute inset-y-0 right-0 hidden w-[45%] bg-[radial-gradient(ellipse_100%_60%_at_right,rgba(0,0,0,0.3),rgba(0,0,0,0.1)_50%,transparent_80%)] md:block" />
+      </BlurIn>
       <div className="container-x relative flex h-full flex-col justify-between gap-12 pb-14 pt-36">
         <div>
           <ul className="side-list text-ink">
@@ -68,11 +72,6 @@ export function Hero() {
           </BlurIn>
         </div>
       </div>
-      {/* soft darkening behind the white right column */}
-      <div
-        aria-hidden
-        className="absolute right-0 top-1/2 hidden h-[70%] w-[35%] -translate-y-1/2 bg-[radial-gradient(ellipse_at_right,rgba(0,0,0,0.38),rgba(0,0,0,0.12)_45%,transparent_70%)] md:block"
-      />
       {/* right column: centred on the screen height */}
       <ul className="side-list absolute right-4 top-1/2 hidden -translate-y-1/2 text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.25)] md:right-10 md:block">
         {h.sideList.map((t, i) => (
