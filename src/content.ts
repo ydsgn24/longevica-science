@@ -82,14 +82,15 @@ export const network = {
   title: ["A global network", "of trusted partners."],
   text: "We work with leading ingredient companies, specialised R&D laboratories, CDMOs, testing facilities and packaging partners across Europe and internationally.",
   image: img("network.jpg"),
-  // height — визуальная высота логотипа в px (логотипы разных пропорций)
+  // height — визуальная высота логотипа в px (логотипы разных пропорций);
+  // ratio — ширина/высота файла, чтобы место под логотип было известно ещё до загрузки
   partners: [
-    { name: "GELITA", src: img("partners/gelita.png"), height: 28 },
-    { name: "Peptan", src: img("partners/peptan.png"), height: 40 },
-    { name: "Creapure", src: img("partners/creapure.png"), height: 24 },
-    { name: "Epax", src: img("partners/epax.png"), height: 30 },
-    { name: "KSM-66 Ashwagandha", src: img("partners/ksm66.png"), height: 34 },
-    { name: "AstaReal", src: img("partners/astareal.png"), height: 40 },
+    { name: "GELITA", src: img("partners/gelita.png"), height: 28, ratio: 4.225 },
+    { name: "Peptan", src: img("partners/peptan.png"), height: 40, ratio: 2.04 },
+    { name: "Creapure", src: img("partners/creapure.png"), height: 24, ratio: 7.317 },
+    { name: "Epax", src: img("partners/epax.png"), height: 30, ratio: 4.22 },
+    { name: "KSM-66 Ashwagandha", src: img("partners/ksm66.png"), height: 34, ratio: 4.25 },
+    { name: "AstaReal", src: img("partners/astareal.png"), height: 40, ratio: 3.243 },
   ],
 };
 

@@ -478,7 +478,8 @@ export function Network() {
       </div>
       {/* partner strip: 80px (mobile) / 100px (desktop) under the logos, where the
           background fades from paper into the white of the form below */}
-      <BlurIn delay={700} className="marquee bg-gradient-to-b from-paper to-white pb-20 pt-10 md:pb-[100px]" aria-label="Partners">
+      {/* no reveal effect here: the strip is in place and running from the first frame */}
+      <div className="marquee bg-gradient-to-b from-paper to-white pb-20 pt-10 md:pb-[100px]" aria-label="Partners">
         <div className="marquee-track">
           {/* the set is repeated so the track is wider than the screen; -50% shift loops seamlessly */}
           {[0, 1].map((half) => (
@@ -487,11 +488,17 @@ export function Network() {
               {[0, 1, 2].flatMap((rep) =>
                 n.partners.map((p) => (
                   <li key={`${rep}-${p.name}`} className="shrink-0 px-7 md:px-14">
+                    {/* fixed size up front, so the track length never changes while it moves */}
                     <img
                       src={p.src}
                       alt={half === 0 && rep === 0 ? p.name : ""}
-                      style={{ height: `calc(${p.height}px * var(--logo-scale))` }}
-                      className="w-auto opacity-85"
+                      loading="eager"
+                      decoding="async"
+                      style={{
+                        height: `calc(${p.height}px * var(--logo-scale))`,
+                        width: `calc(${p.height * p.ratio}px * var(--logo-scale))`,
+                      }}
+                      className="max-w-none opacity-85"
                     />
                   </li>
                 )),
@@ -499,7 +506,7 @@ export function Network() {
             </ul>
           ))}
         </div>
-      </BlurIn>
+      </div>
     </section>
   );
 }

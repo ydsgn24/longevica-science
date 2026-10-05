@@ -16,8 +16,8 @@ body { @apply bg-paper text-ink font-sans antialiased; }
 }
 
 .marquee { overflow: hidden; }
-.marquee-track { display: flex; width: max-content; animation: marquee 40s linear infinite; }
-@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee-track { display: flex; width: max-content; animation: marquee 40s linear infinite; will-change: transform; }
+@keyframes marquee { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
 @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
 
 /* Load reveal: blur → sharp. Images also settle from a slight zoom. */
