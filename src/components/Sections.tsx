@@ -237,8 +237,8 @@ export function Process() {
       className="sticky flex flex-col justify-center bg-[#F8F7F4] py-20 md:min-h-screen">
       <div className="container-x">
         <SectionLabel label={p.label} />
-        <div className="mt-8 grid gap-8 md:grid-cols-2 md:items-end">
-          <BlurIn as="h2" className="h-section text-[40px] md:text-[56px]">
+        <div className="mt-8 grid gap-8 xl:grid-cols-2 xl:items-end">
+          <BlurIn as="h2" className="h-section text-[40px] md:text-[48px] xl:text-[56px]">
             <Lines lines={p.title} />
           </BlurIn>
           <div className="max-w-[440px] md:justify-self-end">
@@ -331,7 +331,7 @@ export function Expertise() {
         <div
           ref={pinned}
           style={{ top: desktop ? 0 : pinTop }}
-          className="sticky flex flex-col md:grid md:h-screen md:grid-cols-2"
+          className="sticky flex flex-col md:grid md:h-screen md:grid-cols-[2fr_3fr] xl:grid-cols-2"
         >
           {/* photo: left half on desktop; square under the heading on mobile
               (the white below it runs straight into the groups of this block) */}
@@ -347,14 +347,14 @@ export function Expertise() {
               as="h2"
               show={desktop ? showHeading : undefined}
               delay={120}
-              className="h-display mt-6 text-[36px] md:mt-8 md:text-[44px]"
+              className="h-display mt-6 text-[36px] md:mt-8 md:text-[32px] lg:text-[36px] xl:text-[44px]"
             >
               {e.title.map((t, i) => (
                 <Fragment key={t}>
-                  <span className="md:whitespace-nowrap">
+                  <span className="xl:whitespace-nowrap">
                     {t}
                     {i < e.title.length - 1 && (
-                      <span className="hidden pl-[0.3em] font-extralight text-ink/40 md:inline">·</span>
+                      <span className="hidden pl-[0.3em] font-extralight text-ink/40 xl:inline">·</span>
                     )}
                   </span>{" "}
                 </Fragment>
@@ -363,7 +363,7 @@ export function Expertise() {
             {/* desktop: row 1 three groups, row 2 two groups on the same column grid */}
             <div className="mt-12 hidden space-y-8 md:block">
               {[e.columns[0], e.columns[1]].map((row, r) => (
-                <div key={r} className="grid grid-cols-3 gap-x-8">
+                <div key={r} className="grid grid-cols-2 gap-x-8 gap-y-8 xl:grid-cols-3">
                   {row.map((g) => (
                     <ExpertiseGroupList key={g.title} g={g} play={revealed} startAt={desktopAt[e.columns.flat().indexOf(g)]} />
                   ))}
@@ -465,7 +465,7 @@ export function Network() {
     >
       {/* photo flush with the top separator; desktop shows the full photo at its own 3:1 proportions;
           the text sits on its empty left part */}
-      <div className="relative">
+      <div className="relative overflow-hidden">
         <BlurIn as="img" variant="wipe" src={n.image} alt="" className="hidden h-auto w-full md:block" />
         <div className="md:hidden">
           <ScrollRevealPhoto src={n.image} imgClassName="object-[68%_center]" />
