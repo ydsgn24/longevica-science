@@ -9,7 +9,7 @@ const registryCode = "17602507";
 const address = "Tornimäe tn 5, Kesklinna linnaosa, Tallinn, Harju maakond, Estonia";
 const contactEmail = "Longevicas@gmail.com";
 // "Last updated" on all three pages — set to the launch date on launch day.
-const lastUpdated = "[launch date]";
+const lastUpdated = "6 October 2026";
 
 export const legalNotice: LegalDoc = {
   slug: "legal-notice",
