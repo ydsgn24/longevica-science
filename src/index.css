@@ -86,3 +86,8 @@ body { @apply bg-paper text-ink font-sans antialiased; }
 @media (prefers-reduced-motion: reduce) {
   .valid-mark, .valid-mark path, .field-error { animation: none; stroke-dashoffset: 0; }
 }
+
+/* Contact: bar that empties during the post-submit countdown */
+.sent-progress { transform-origin: left; animation: sent-progress linear forwards; }
+@keyframes sent-progress { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+@media (prefers-reduced-motion: reduce) { .sent-progress { animation: none; } }

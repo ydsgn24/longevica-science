@@ -108,7 +108,12 @@ export const contact = {
     message: "Please tell us a little about your idea",
   },
   submit: "Get in touch",
-  sent: "Thank you!",
+  // shown for 20 seconds after a successful submit
+  thanks: {
+    title: ["Thank you!", "We’ll be in touch soon."],
+    text: "Your request has been received. We’ll review it and get back to you shortly.",
+    note: "The form will be available again in",
+  },
 };
 
 export const footer = {

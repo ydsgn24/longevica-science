@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useCallback, Fragment, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { legalDocs } from "../legal";
 import * as c from "../content";
@@ -598,9 +598,13 @@ const FIELD_ORDER: FieldName[] = ["name", "company", "email", "phone", "message"
 
 export function Contact() {
   const k = c.contact;
-  const [sent, setSent] = useState(false);
-  const [values, setValues] = useState<Record<FieldName, string>>({ name: "", company: "", email: "", phone: "", message: "" });
+  // form → leaving (form fades out) → sent (thank-you + 20s countdown) → form again
+  const [phase, setPhase] = useState<"form" | "leaving" | "sent">("form");
+  const [values, setValues] = useState<Record<FieldName, string>>(EMPTY_VALUES);
   const [touched, setTouched] = useState<Partial<Record<FieldName, boolean>>>({});
+  // keep the right column as tall as the form, so nothing jumps while it is hidden
+  const formBox = useRef<HTMLDivElement>(null);
+  const [formHeight, setFormHeight] = useState<number>();
 
   const field = (name: FieldName, extra: Partial<React.ComponentProps<typeof FormField>> = {}) => (
     <FormField
@@ -621,8 +625,19 @@ export function Contact() {
       document.getElementById(`field-${firstInvalid}`)?.focus();
       return;
     }
-    setSent(true);
+    setFormHeight(formBox.current?.offsetHeight);
+    setPhase("leaving");
+    window.setTimeout(() => setPhase("sent"), 450);
   };
+
+  const reset = useCallback(() => {
+    setValues(EMPTY_VALUES);
+    setTouched({});
+    setPhase("form");
+  }, []);
+
+  const sent = phase === "sent";
+  const intro = sent ? k.thanks : k;
 
   return (
     <section
@@ -636,36 +651,76 @@ export function Contact() {
           <BlurIn className="[&>p]:justify-center md:[&>p]:justify-start">
             <SectionLabel label={k.label} />
           </BlurIn>
-          <BlurIn as="h2" delay={100} className="h-section mt-8 text-[40px] md:text-[56px]">
-            <Lines lines={k.title} />
-          </BlurIn>
-          <BlurIn as="p" delay={250} className="mx-auto mt-6 max-w-[420px] text-[15px] leading-relaxed text-ink/80 md:mx-0">
-            {k.text}
-          </BlurIn>
+          {/* keyed, so the heading and text blur in again when they switch */}
+          <div key={sent ? "thanks" : "intro"} aria-live="polite">
+            <BlurIn as="h2" delay={100} className="h-section mt-8 text-[40px] md:text-[56px]">
+              <Lines lines={intro.title} />
+            </BlurIn>
+            <BlurIn as="p" delay={250} className="mx-auto mt-6 max-w-[420px] text-[15px] leading-relaxed text-ink/80 md:mx-0">
+              {intro.text}
+            </BlurIn>
+          </div>
         </div>
-        <form noValidate className="grid content-start gap-3 sm:grid-cols-2" onSubmit={onSubmit}>
-          <BlurIn delay={400}>{field("name")}</BlurIn>
-          <BlurIn delay={490}>{field("company")}</BlurIn>
-          <BlurIn delay={580}>{field("email", { type: "email", inputMode: "email" })}</BlurIn>
-          <BlurIn delay={670}>
-            {field("phone", {
-              type: "tel",
-              inputMode: "tel",
-              // phone: keep only characters a number can contain
-              onChange: (v: string) => setValues((s) => ({ ...s, phone: v.replace(/[^\d+\s()-]/g, "") })),
-            })}
-          </BlurIn>
-          <BlurIn delay={760} className="sm:col-span-2">
-            {field("message", { multiline: true })}
-          </BlurIn>
-          <BlurIn delay={850} className="sm:col-span-2">
-            <FillButton type="submit" className="w-full" arrow={!sent}>
-              {sent ? k.sent : k.submit}
-            </FillButton>
-          </BlurIn>
-        </form>
+        <div ref={formBox} style={sent && formHeight ? { minHeight: formHeight } : undefined} className="flex flex-col justify-center">
+          {sent ? (
+            <SentCountdown seconds={20} note={k.thanks.note} onDone={reset} />
+          ) : (
+            <form
+              noValidate
+              className={`grid content-start gap-3 transition-[opacity,filter,transform] duration-[450ms] sm:grid-cols-2 ${
+                phase === "leaving" ? "pointer-events-none translate-y-2 opacity-0 blur-sm" : ""
+              }`}
+              onSubmit={onSubmit}
+            >
+              <BlurIn delay={400}>{field("name")}</BlurIn>
+              <BlurIn delay={490}>{field("company")}</BlurIn>
+              <BlurIn delay={580}>{field("email", { type: "email", inputMode: "email" })}</BlurIn>
+              <BlurIn delay={670}>
+                {field("phone", {
+                  type: "tel",
+                  inputMode: "tel",
+                  // phone: keep only characters a number can contain
+                  onChange: (v: string) => setValues((s) => ({ ...s, phone: v.replace(/[^\d+\s()-]/g, "") })),
+                })}
+              </BlurIn>
+              <BlurIn delay={760} className="sm:col-span-2">
+                {field("message", { multiline: true })}
+              </BlurIn>
+              <BlurIn delay={850} className="sm:col-span-2">
+                <FillButton type="submit" className="w-full">
+                  {k.submit}
+                </FillButton>
+              </BlurIn>
+            </form>
+          )}
+        </div>
       </div>
     </section>
+  );
+}
+
+const EMPTY_VALUES: Record<FieldName, string> = { name: "", company: "", email: "", phone: "", message: "" };
+
+/** Thin bar that empties over `seconds`, with a live countdown; calls onDone at 0. */
+function SentCountdown({ seconds, note, onDone }: { seconds: number; note: string; onDone: () => void }) {
+  const [left, setLeft] = useState(seconds);
+  useEffect(() => {
+    const id = window.setInterval(() => setLeft((s) => Math.max(0, s - 1)), 1000);
+    return () => window.clearInterval(id);
+  }, []);
+  useEffect(() => {
+    if (left === 0) onDone();
+  }, [left, onDone]);
+  return (
+    <BlurIn className="w-full">
+      <div className="relative h-[2px] w-full overflow-hidden bg-line">
+        <div className="sent-progress absolute inset-0 bg-ink" style={{ animationDuration: `${seconds}s` }} />
+      </div>
+      <p className="label mt-4 flex items-center justify-between text-muted">
+        <span>{note}</span>
+        <span className="tabular-nums normal-case text-ink">{left}s</span>
+      </p>
+    </BlurIn>
   );
 }
 
