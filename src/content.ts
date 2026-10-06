@@ -98,14 +98,13 @@ export const contact = {
     company: "Company*",
     email: "Your email*",
     phone: "Telephone number*",
-    message: "What would you like to create?*",
+    message: "What would you like to create?",
   },
   errors: {
     name: "Please enter your name",
     company: "Please enter your company",
     email: "Please enter a valid email, e.g. name@company.com",
     phone: "Please enter a valid phone number",
-    message: "Please tell us a little about your idea",
   },
   submit: "Get in touch",
   // shown for 20 seconds after a successful submit

@@ -419,7 +419,7 @@ export function Founder() {
               style={desktop ? { transform: `translateX(${photoShift}%) scale(${photoScale})` } : undefined}
             />
           </div>
-          <div className="flex flex-col justify-center px-4 py-14 md:absolute md:inset-y-0 md:right-0 md:w-1/2 md:px-10 md:pb-8 md:pt-28">
+          <div className="flex flex-col justify-center px-4 py-14 founder-copy md:absolute md:inset-y-0 md:right-0 md:w-1/2 md:px-10 md:py-8">
             <BlurIn show={showText}>
               <SectionLabel label={f.label} />
             </BlurIn>
@@ -429,14 +429,14 @@ export function Founder() {
             <BlurIn as="p" show={showText} delay={180} className="label mt-4 font-semibold">
               {f.role}
             </BlurIn>
-            <div className="mt-5 max-w-[640px] space-y-3 text-[16px] leading-relaxed text-ink/80">
+            <div className="founder-bio mt-5 max-w-[640px] space-y-3 text-[16px] leading-relaxed text-ink/80">
               {f.text.map((t, i) => (
                 <BlurIn as="p" key={t} show={showText} delay={260 + i * 90}>
                   {t}
                 </BlurIn>
               ))}
             </div>
-            <BlurIn show={showText} delay={750} className="mt-6">
+            <BlurIn show={showText} delay={750} className="founder-link mt-6">
               <a href={f.instagram} target="_blank" rel="noopener noreferrer" className="link-arrow">
                 <InstagramIcon /> {f.link}
               </a>
@@ -525,6 +525,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 /** Returns the error key for a field, or null when the value is valid. */
 function validate(name: FieldName, value: string): FieldName | null {
   const v = value.trim();
+  if (name === "message") return null; // optional
   if (name === "email") return EMAIL_RE.test(v) ? null : name;
   if (name === "phone") {
     const digits = v.replace(/\D/g, "").length;
@@ -587,7 +588,7 @@ function FormField({
       {showValid && <ValidMark />}
       {showError && (
         <p id={`error-${name}`} className="field-error mt-1.5 text-left text-[16px] text-[#B3261E]">
-          {k.errors[name]}
+          {(k.errors as Partial<Record<FieldName, string>>)[name]}
         </p>
       )}
     </div>

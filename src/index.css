@@ -91,3 +91,12 @@ body { @apply bg-paper text-ink font-sans antialiased; }
 .sent-progress { transform-origin: left; animation: sent-progress linear forwards; }
 @keyframes sent-progress { from { transform: scaleX(1); } to { transform: scaleX(0); } }
 @media (prefers-reduced-motion: reduce) { .sent-progress { animation: none; } }
+
+/* Founder: on short desktop screens the bio tightens up so it fits between the edges */
+@media (min-width: 768px) and (max-height: 820px) {
+  .founder-copy h2 { font-size: 40px; margin-top: 1rem; }
+  .founder-copy .founder-bio { line-height: 1.45; margin-top: 0.875rem; }
+  .founder-copy .founder-bio > * { margin-top: 0; margin-bottom: 0; }
+  .founder-copy .founder-bio > * + * { margin-top: 0.5rem; }
+  .founder-copy .founder-link { margin-top: 1rem; }
+}
