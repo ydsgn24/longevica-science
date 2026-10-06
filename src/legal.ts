@@ -5,12 +5,14 @@ export type LegalSection = { heading: string; body: string[] };
 export type LegalDoc = { slug: string; title: string; updated: string; intro: string; sections: LegalSection[] };
 
 const company = "Longevica Science OÜ";
-const contactEmail = "[contact email]";
+const contactEmail = "Longevicas@gmail.com";
+// "Last updated" on all three pages — set to the launch date on launch day.
+const lastUpdated = "[launch date]";
 
 export const legalNotice: LegalDoc = {
   slug: "legal-notice",
   title: "Legal Notice",
-  updated: "[date]",
+  updated: lastUpdated,
   intro: "Information about the operator of this website.",
   sections: [
     {
@@ -29,7 +31,7 @@ export const legalNotice: LegalDoc = {
     },
     {
       heading: "Contact",
-      body: [`Email: ${contactEmail}`, "Telephone: [phone number]"],
+      body: [`Email: ${contactEmail}`],
     },
     {
       heading: "Content",
@@ -55,7 +57,7 @@ export const legalNotice: LegalDoc = {
 export const privacyPolicy: LegalDoc = {
   slug: "privacy-policy",
   title: "Privacy Policy",
-  updated: "[date]",
+  updated: lastUpdated,
   intro: `This Privacy Policy explains how ${company} collects and uses personal data when you visit this website or contact us. We process personal data in accordance with the EU General Data Protection Regulation (GDPR) and the Estonian Personal Data Protection Act.`,
   sections: [
     {
@@ -86,7 +88,8 @@ export const privacyPolicy: LegalDoc = {
       body: [
         "We do not sell your personal data. We share it only with service providers who process it on our behalf under a data processing agreement:",
         "Lovable — website building and hosting; contact form submissions are stored in the database provided through Lovable Cloud (Supabase).",
-        "[email provider, CRM or other tools, if used]",
+        "Telegram — new contact form enquiries are forwarded to our team as notifications via a Telegram bot.",
+        "Resend — email delivery of contact form notifications to our team.",
       ],
     },
     {
@@ -98,8 +101,8 @@ export const privacyPolicy: LegalDoc = {
     {
       heading: "6. Retention",
       body: [
-        "Contact form enquiries are kept for as long as necessary to handle your request and any follow-up, and deleted no later than [24 months] after our last communication, unless a contract is concluded or a longer period is required by law.",
-        "Technical log data is kept by our hosting provider for a short period, typically no longer than [30 days].",
+        "Contact form enquiries are kept for as long as necessary to handle your request and any follow-up, and deleted no later than 24 months after our last communication, unless a contract is concluded or a longer period is required by law.",
+        "Technical log data is kept by our hosting provider for a short period, typically no longer than 30 days.",
       ],
     },
     {
@@ -128,7 +131,7 @@ export const privacyPolicy: LegalDoc = {
 export const cookiePolicy: LegalDoc = {
   slug: "cookie-policy",
   title: "Cookie Policy",
-  updated: "[date]",
+  updated: lastUpdated,
   intro: "This Cookie Policy explains how this website uses cookies and similar technologies.",
   sections: [
     {
