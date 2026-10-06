@@ -5,6 +5,8 @@ export type LegalSection = { heading: string; body: string[] };
 export type LegalDoc = { slug: string; title: string; updated: string; intro: string; sections: LegalSection[] };
 
 const company = "Longevica Science OÜ";
+const registryCode = "17602507";
+const address = "Tornimäe tn 5, Kesklinna linnaosa, Tallinn, Harju maakond, Estonia";
 const contactEmail = "Longevicas@gmail.com";
 // "Last updated" on all three pages — set to the launch date on launch day.
 const lastUpdated = "[launch date]";
@@ -19,9 +21,8 @@ export const legalNotice: LegalDoc = {
       heading: "Website operator",
       body: [
         company,
-        "Registry code: [registry code]",
-        "Registered address: [street, city, postal code], Estonia",
-        "VAT number: [VAT number, if registered]",
+        `Registry code: ${registryCode}`,
+        `Registered address: ${address}`,
         "Registered in the Commercial Register of the Republic of Estonia (Äriregister).",
       ],
     },
@@ -63,7 +64,7 @@ export const privacyPolicy: LegalDoc = {
     {
       heading: "1. Data controller",
       body: [
-        `${company}, registry code [registry code], [registered address], Estonia.`,
+        `${company}, registry code ${registryCode}, ${address}.`,
         `For any privacy-related questions, contact us at ${contactEmail}.`,
       ],
     },
