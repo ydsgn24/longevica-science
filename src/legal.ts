@@ -88,9 +88,8 @@ export const privacyPolicy: LegalDoc = {
       heading: "4. Recipients and processors",
       body: [
         "We do not sell your personal data. We share it only with service providers who process it on our behalf under a data processing agreement:",
-        "Lovable — website building and hosting; contact form submissions are stored in the database provided through Lovable Cloud (Supabase).",
+        "Lovable — website building and hosting; contact form submissions are stored in the database provided through Lovable Cloud (Supabase), and email notifications about new enquiries are sent to our team through Lovable Cloud Emails.",
         "Telegram — new contact form enquiries are forwarded to our team as notifications via a Telegram bot.",
-        "Resend — email delivery of contact form notifications to our team.",
       ],
     },
     {
