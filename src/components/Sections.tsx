@@ -196,7 +196,7 @@ export function Approach() {
         className="sticky flex flex-col md:grid md:h-screen md:grid-cols-2"
       >
         <div className="flex flex-col justify-center px-4 pb-8 pt-24 md:px-10 md:py-16">
-          <SectionLabel num={a.num} label={a.label} />
+          <SectionLabel label={a.label} />
           <BlurIn as="h2" className="h-section mt-6 text-[40px] md:mt-8 md:text-[60px]">
             <Lines lines={a.title} />
           </BlurIn>
@@ -236,7 +236,7 @@ export function Process() {
       style={{ top: stickyTop }}
       className="sticky flex flex-col justify-center bg-[#F8F7F4] py-20 md:min-h-screen">
       <div className="container-x">
-        <SectionLabel num={p.num} label={p.label} />
+        <SectionLabel label={p.label} />
         <div className="mt-8 grid gap-8 md:grid-cols-2 md:items-end">
           <BlurIn as="h2" className="h-section text-[40px] md:text-[56px]">
             <Lines lines={p.title} />
@@ -340,7 +340,7 @@ export function Expertise() {
           </div>
           <div className="order-first px-4 pb-8 pt-24 md:order-none md:flex md:flex-col md:justify-center md:px-10 md:py-16">
             <BlurIn show={desktop ? showHeading : undefined}>
-              <SectionLabel num={e.num} label={e.label} />
+              <SectionLabel label={e.label} />
             </BlurIn>
             {/* an enumeration set inline; on desktop each area stays on one line */}
             <BlurIn
@@ -421,7 +421,7 @@ export function Founder() {
           </div>
           <div className="flex flex-col justify-center px-4 py-14 md:absolute md:inset-y-0 md:right-0 md:w-1/2 md:px-10 md:py-0">
             <BlurIn show={showText}>
-              <SectionLabel num={f.num} label={f.label} />
+              <SectionLabel label={f.label} />
             </BlurIn>
             <BlurIn as="h2" show={showText} delay={80} className="h-section mt-8 text-[44px] md:text-[56px]">
               <Lines lines={f.name} />
@@ -473,7 +473,7 @@ export function Network() {
         <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-16 bg-gradient-to-t from-paper to-transparent md:block" />
         <div className="container-x py-10 md:absolute md:inset-y-0 md:left-0 md:flex md:w-[42%] md:flex-col md:justify-center md:py-0">
           <BlurIn delay={300}>
-            <SectionLabel num={n.num} label={n.label} />
+            <SectionLabel label={n.label} />
           </BlurIn>
           <BlurIn as="h2" delay={400} className="h-section mt-6 text-[36px] lg:text-[52px]">
             <Lines lines={n.title} />
@@ -634,7 +634,7 @@ export function Contact() {
         {/* mobile: centred; desktop: left-aligned */}
         <div className="text-center md:text-left">
           <BlurIn className="[&>p]:justify-center md:[&>p]:justify-start">
-            <SectionLabel num={k.num} label={k.label} />
+            <SectionLabel label={k.label} />
           </BlurIn>
           <BlurIn as="h2" delay={100} className="h-section mt-8 text-[40px] md:text-[56px]">
             <Lines lines={k.title} />

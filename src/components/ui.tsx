@@ -17,13 +17,8 @@ export function Logo({ className = "" }: { className?: string }) {
   );
 }
 
-export function SectionLabel({ num, label }: { num: string; label: string }) {
-  return (
-    <p className="label flex gap-6 text-muted">
-      <span className="text-ink">{num}</span>
-      {label}
-    </p>
-  );
+export function SectionLabel({ label }: { label: string }) {
+  return <p className="label flex text-muted">{label}</p>;
 }
 
 export function Lines({ lines }: { lines: string[] }) {

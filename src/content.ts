@@ -12,7 +12,6 @@ export const hero = {
 };
 
 export const approach = {
-  num: "01",
   label: "Our approach",
   title: ["Science.", "Expertise.", "Execution."],
   text: "We combine scientific knowledge, ingredient intelligence and a global network to develop high-quality, effective and commercially successful products.",
@@ -21,7 +20,6 @@ export const approach = {
 };
 
 export const process = {
-  num: "02",
   label: "Our process",
   title: ["From concept to", "market-ready product."],
   text: "We guide you through every step — from product concept and ingredient selection to formulation, manufacturing, packaging and market launch.",
@@ -36,7 +34,6 @@ export const process = {
 };
 
 export const expertise = {
-  num: "03",
   label: "Our expertise",
   title: ["Longevity", "Wellness", "Performance", "Beauty", "Functional nutrition"],
   image: img("expertise.jpg"),
@@ -54,7 +51,6 @@ export const expertise = {
 };
 
 export const founder = {
-  num: "04",
   label: "Founder",
   name: ["Victoria", "Malashenko"],
   role: "Founder & Product Development Director",
@@ -77,7 +73,6 @@ export const founder = {
 };
 
 export const network = {
-  num: "05",
   label: "Our network",
   title: ["A global network", "of trusted partners."],
   text: "We work with leading ingredient companies, specialised R&D laboratories, CDMOs, testing facilities and packaging partners across Europe and internationally.",
@@ -95,7 +90,6 @@ export const network = {
 };
 
 export const contact = {
-  num: "06",
   label: "Contact",
   title: ["Have an idea?", "Let’s create it together."],
   text: "Tell us what you want to create. We’ll help you define it, formulate it, manufacture it and bring it to market.",
