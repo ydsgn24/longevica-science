@@ -74,7 +74,7 @@ export function Hero() {
           <BlurIn as="h1" show={ready} delay={150} className="h-display text-[54px] md:text-[96px]">
             <Lines lines={h.title} />
           </BlurIn>
-          <BlurIn as="p" show={ready} delay={450} className="mt-8 max-w-[420px] text-[15px] leading-relaxed text-ink/80">
+          <BlurIn as="p" show={ready} delay={450} className="mt-8 max-w-[420px] text-[16px] leading-relaxed text-ink/80">
             {h.text}
           </BlurIn>
         </div>
@@ -200,7 +200,7 @@ export function Approach() {
           <BlurIn as="h2" className="h-section mt-6 text-[40px] md:mt-8 md:text-[60px]">
             <Lines lines={a.title} />
           </BlurIn>
-          <BlurIn as="p" delay={150} className="mt-5 max-w-[420px] text-[15px] leading-relaxed text-ink/80 md:mt-6">{a.text}</BlurIn>
+          <BlurIn as="p" delay={150} className="mt-5 max-w-[420px] text-[16px] leading-relaxed text-ink/80 md:mt-6">{a.text}</BlurIn>
         </div>
         <div className="relative aspect-square w-full md:aspect-auto md:h-full">
           <RevealPhoto src={a.image} mask={mask} photo={photo} start={desktop ? undefined : 0.45}>
@@ -242,7 +242,7 @@ export function Process() {
             <Lines lines={p.title} />
           </BlurIn>
           <div className="max-w-[440px] md:justify-self-end">
-            <BlurIn as="p" delay={150} className="text-[15px] leading-relaxed text-ink/80">{p.text}</BlurIn>
+            <BlurIn as="p" delay={150} className="text-[16px] leading-relaxed text-ink/80">{p.text}</BlurIn>
           </div>
         </div>
         {/* mobile: square photos 8px apart (16px between rows), number + title on a darkened bottom edge;
@@ -264,7 +264,7 @@ export function Process() {
                     <h3 className="label mt-0.5 font-semibold">{s.title}</h3>
                   </div>
                 </BlurIn>
-                <BlurIn as="p" delay={stepDelay(i) + 350} className="mt-2 text-[13px] leading-snug text-ink/75 md:mt-3">
+                <BlurIn as="p" delay={stepDelay(i) + 350} className="mt-2 text-[16px] leading-snug text-ink/75 md:mt-3">
                   {s.text}
                 </BlurIn>
               </li>
@@ -285,7 +285,7 @@ function ExpertiseGroupList({ g, play, startAt }: { g: ExpertiseGroup; play: boo
       <p className="label font-semibold">
         <RollText text={g.title} enter play={play} delay={startAt * 70} />
       </p>
-      <ul className="mt-2 space-y-0.5 text-[12px] text-muted">
+      <ul className="mt-2 space-y-0.5 text-[16px] text-muted">
         {g.items.map((it, i) => (
           <li key={it}>
             <RollText text={it} enter play={play} delay={(startAt + 1 + i) * 70} />
@@ -419,24 +419,24 @@ export function Founder() {
               style={desktop ? { transform: `translateX(${photoShift}%) scale(${photoScale})` } : undefined}
             />
           </div>
-          <div className="flex flex-col justify-center px-4 py-14 md:absolute md:inset-y-0 md:right-0 md:w-1/2 md:px-10 md:py-0">
+          <div className="flex flex-col justify-center px-4 py-14 md:absolute md:inset-y-0 md:right-0 md:w-1/2 md:px-10 md:pb-8 md:pt-28">
             <BlurIn show={showText}>
               <SectionLabel label={f.label} />
             </BlurIn>
-            <BlurIn as="h2" show={showText} delay={80} className="h-section mt-8 text-[44px] md:text-[56px]">
+            <BlurIn as="h2" show={showText} delay={80} className="h-section mt-6 text-[44px] md:text-[48px]">
               <Lines lines={f.name} />
             </BlurIn>
-            <BlurIn as="p" show={showText} delay={180} className="label mt-6 font-semibold">
+            <BlurIn as="p" show={showText} delay={180} className="label mt-4 font-semibold">
               {f.role}
             </BlurIn>
-            <div className="mt-6 max-w-[560px] space-y-4 text-[14px] leading-relaxed text-ink/80">
+            <div className="mt-5 max-w-[640px] space-y-3 text-[16px] leading-relaxed text-ink/80">
               {f.text.map((t, i) => (
                 <BlurIn as="p" key={t} show={showText} delay={260 + i * 90}>
                   {t}
                 </BlurIn>
               ))}
             </div>
-            <BlurIn show={showText} delay={750} className="mt-8">
+            <BlurIn show={showText} delay={750} className="mt-6">
               <a href={f.instagram} target="_blank" rel="noopener noreferrer" className="link-arrow">
                 <InstagramIcon /> {f.link}
               </a>
@@ -448,7 +448,7 @@ export function Founder() {
         {f.facts.map((x, i) => (
           <BlurIn key={x.title} delay={i * 100}>
             <p className="label font-semibold">{x.title}</p>
-            <p className="mt-2 max-w-[240px] text-[13px] text-muted">{x.text}</p>
+            <p className="mt-2 max-w-[240px] text-[16px] text-muted">{x.text}</p>
           </BlurIn>
         ))}
       </div>
@@ -478,7 +478,7 @@ export function Network() {
           <BlurIn as="h2" delay={400} className="h-section mt-6 text-[36px] lg:text-[52px]">
             <Lines lines={n.title} />
           </BlurIn>
-          <BlurIn as="p" delay={550} className="mt-5 max-w-[420px] text-[15px] leading-relaxed text-ink/80">
+          <BlurIn as="p" delay={550} className="mt-5 max-w-[420px] text-[16px] leading-relaxed text-ink/80">
             {n.text}
           </BlurIn>
         </div>
@@ -586,7 +586,7 @@ function FormField({
       )}
       {showValid && <ValidMark />}
       {showError && (
-        <p id={`error-${name}`} className="field-error mt-1.5 text-left text-[12px] text-[#B3261E]">
+        <p id={`error-${name}`} className="field-error mt-1.5 text-left text-[16px] text-[#B3261E]">
           {k.errors[name]}
         </p>
       )}
@@ -656,7 +656,7 @@ export function Contact() {
             <BlurIn as="h2" delay={100} className="h-section mt-8 text-[40px] md:text-[56px]">
               <Lines lines={intro.title} />
             </BlurIn>
-            <BlurIn as="p" delay={250} className="mx-auto mt-6 max-w-[420px] text-[15px] leading-relaxed text-ink/80 md:mx-0">
+            <BlurIn as="p" delay={250} className="mx-auto mt-6 max-w-[420px] text-[16px] leading-relaxed text-ink/80 md:mx-0">
               {intro.text}
             </BlurIn>
           </div>
@@ -761,12 +761,12 @@ export function Footer() {
             href={f.instagram.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 flex w-fit items-center gap-2 text-[13px] text-ink/80 hover:text-ink"
+            className="mt-6 flex w-fit items-center gap-2 text-[16px] text-ink/80 hover:text-ink"
           >
             <InstagramIcon /> {f.instagram.label}
           </a>
         </div>
-        <div className="text-[12px] text-muted md:text-right">
+        <div className="text-[16px] text-muted md:text-right">
           <p>{f.copyright}</p>
           <p>{f.rights}</p>
           <p className="mt-4 flex gap-5 md:justify-end">

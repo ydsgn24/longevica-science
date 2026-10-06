@@ -40,7 +40,7 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
           {doc.sections.map((s) => (
             <section key={s.heading} className="mt-12">
               <h2 className="label font-semibold">{s.heading}</h2>
-              <div className="mt-4 space-y-3 text-[15px] leading-relaxed text-ink/80">
+              <div className="mt-4 space-y-3 text-[16px] leading-relaxed text-ink/80">
                 {s.body.map((p) => (
                   <p key={p}>
                     <WithPlaceholders text={p} />

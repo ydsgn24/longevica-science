@@ -12,7 +12,7 @@ body { @apply bg-paper text-ink font-sans antialiased; }
   .h-section { @apply font-normal leading-[1.05] tracking-[-0.02em]; }
   .link-arrow { @apply label inline-flex items-center gap-2 border-b border-ink/40 pb-1 hover:border-ink transition-colors; }
   .btn-dark { @apply label inline-flex items-center gap-3 rounded-sm bg-ink px-6 py-3.5 text-white hover:bg-black/80 transition-colors; }
-  .field { @apply w-full border border-line bg-white/60 px-4 py-3 text-sm placeholder:text-muted focus:border-ink focus:outline-none; }
+  .field { @apply w-full border border-line bg-white/60 px-4 py-3 text-base placeholder:text-muted focus:border-ink focus:outline-none; }
 }
 
 .marquee { overflow: hidden; }
