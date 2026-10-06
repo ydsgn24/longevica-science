@@ -61,7 +61,7 @@ export const founder = {
     "I continuously explore emerging ingredients, new technologies and scientific developments, translating them into distinctive product concepts with strong market potential.",
     "Through Longevica Science, I bring this experience together to help brands and entrepreneurs transform ideas into distinctive, commercially viable products.",
   ],
-  link: "More about Victoria",
+  link: "Instagram",
   instagram: "https://www.instagram.com/victoria_malashenko/",
   image: img("founder.jpg"),
   facts: [
